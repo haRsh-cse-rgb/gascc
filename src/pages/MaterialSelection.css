@@ -1,0 +1,133 @@
+/* src/pages/MaterialSelection.css */
+.material-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: calc(100vh - 60px);
+    padding: 40px 20px;
+    margin-top: 60px;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-y: auto;
+  }
+  
+  .material-selection h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: #343d68;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  
+  select {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px 0;
+    padding: 12px;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  select:hover {
+    border-color: #007bff;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+  
+  button {
+    padding: 12px 24px;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    margin: 10px 0;
+  }
+  
+  .next-button {
+    background-color: #e84949;
+    color: white;
+    margin: 20px auto 10px;
+  }
+  
+  .next-button:hover {
+    background-color: #d73838;
+    transform: translateY(-2px);
+  }
+  
+  .cancel-button {
+    background-color: #6c757d;
+    color: white;
+    margin: 10px auto 20px;
+  }
+  
+  .cancel-button:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+  }
+  
+  button:active {
+    transform: translateY(0);
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 1024px) {
+    .material-selection {
+      padding: 20px;
+      margin-top: 80px; /* Increased top margin for mobile navbar */
+    }
+  
+    select {
+      width: 90%;
+      max-width: 300px;
+    }
+  
+    button {
+      width: 90%;
+      max-width: 300px;
+    }
+  }
+  
+  /* Tablet-specific adjustments */
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    .material-selection {
+      padding: 30px;
+    }
+  
+    select, button {
+      max-width: 350px;
+    }
+  }
+  
+  /* Button container for better spacing */
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+  }
+  
+  /* Reduce animations for users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    select, button {
+      transition: none;
+    }
+  
+    button:hover {
+      transform: none;
+    }
+  }

@@ -1,0 +1,129 @@
+/* LoggedOff.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: whitesmoke;
+}
+
+.logged-off-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: calc(100vh - 60px);
+  padding: 40px 20px;
+  margin-top: 60px;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: auto;
+}
+
+.logged-off-container h1 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: #343d68;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.logged-off-container p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #333;
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Common button styles for HomePage, MaterialSelection, and LoggedOff */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+button,
+.start-again-button,
+.rescons-button,
+.contact-button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: #fff;
+  background-color: #e84949;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: auto;
+  /* Changed from fixed width */
+  min-width: 140px;
+  /* Reduced min-width */
+  max-width: 200px;
+  /* Added max-width */
+  text-align: center;
+}
+
+.start-again-button:hover,
+.rescons-button:hover {
+  background-color: #d73838;
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+.start-again-button:active,
+.rescons-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .logged-off-container {
+    padding: 20px;
+    margin-top: 80px;
+    /* Increased top margin for mobile navbar */
+  }
+
+  .button-container {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .start-again-button,
+  .rescons-button {
+    width: 100%;
+  }
+}
+
+/* Tablet-specific adjustments */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .logged-off-container {
+    padding: 30px;
+  }
+
+  .button-container {
+    max-width: 350px;
+  }
+}
+
+/* Reduce animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .start-again-button,
+  .rescons-button {
+    transition: none;
+  }
+
+  .start-again-button:hover,
+  .rescons-button:hover {
+    transform: none;
+  }
+}

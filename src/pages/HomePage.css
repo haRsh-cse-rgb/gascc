@@ -1,0 +1,259 @@
+/* src/pages/HomePage.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background-color: whitesmoke;
+}
+
+.homepage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: calc(100vh - 60px);
+    text-align: center;
+    padding: 40px 20px;
+    animation: fadeIn 0.8s ease-in;
+    margin-top: 60px;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-y: auto;
+    /* Enable scrolling */
+
+}
+
+h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: #343d68;
+    margin-bottom: 20px;
+    animation: slideDown 0.6s ease-out;
+    width: 100%;
+}
+
+p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: #333;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: fadeInSlide 0.6s ease-out forwards;
+    animation-delay: 0.3s;
+    width: 100%;
+    max-width: 800px;
+}
+
+.demo-notice {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: fadeInSlide 0.6s ease-out forwards;
+    animation-delay: 0.6s;
+    width: 90%;
+    max-width: 600px;
+}
+
+.demo-notice:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.main-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeInSlide 0.6s ease-out forwards;
+    animation-delay: 0.9s;
+    width: 100%;
+    max-width: 600px;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    background-color: #e84949;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px;
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+button:hover {
+    background-color: #d73838;
+    transform: translateY(-2px);
+}
+
+button:hover::after {
+    width: 200px;
+    height: 200px;
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.contact-button {
+    background-color: #007bff;
+    margin: 15px 0;
+}
+
+.contact-button:hover {
+    background-color: #0056b3;
+}
+
+/* Animations */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+
+    body {
+        position: relative;
+        /* Add this */
+    }
+
+    .homepage-container {
+        padding: 20px;
+        margin-top: 60px;
+        /* Consistent margin for navbar */
+        height: auto;
+        min-height: calc(100vh - 60px);
+        position: relative;
+        z-index: 1;
+    }
+
+    .main-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .demo-notice {
+        width: 100%;
+        padding: 15px;
+    }
+
+    /* When nav is open */
+    .nav-open .homepage-container {
+        pointer-events: none;
+        /* Prevent interaction with content when nav is open */
+    }
+
+    .main-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .demo-notice {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+/* Additional tablet-specific adjustments */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .homepage-container {
+        padding: 30px;
+    }
+
+    .main-buttons {
+        flex-direction: row;
+        max-width: 800px;
+    }
+
+    button {
+        flex: 1;
+        min-width: 200px;
+    }
+}
+
+/* Reduce animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .homepage-container,
+    h1,
+    p,
+    .demo-notice,
+    .main-buttons {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    button:hover {
+        transform: none;
+    }
+}

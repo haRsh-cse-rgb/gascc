@@ -1,0 +1,377 @@
+/* src/pages/CalculationMode.css */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.calculation-mode {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+  margin-top: 60px;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: auto;
+  min-height: calc(100vh - 60px);
+  /* Adjusted for navbar */
+}
+
+.content-wrapper {
+  flex: 1;
+  width: 100%;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  color: #343d68;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  color: #343d68;
+  margin: 20px 0;
+}
+
+.coordinate-system,
+.input-parameters {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Updated radio button styles */
+.coordinate-options {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.coordinate-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-right: 20px;
+  white-space: nowrap;
+}
+
+/* Scoped radio button styles */
+.coordinate-options input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e84949;
+  border-radius: 50%;
+  outline: none;
+  margin: 0;
+  flex: 0 0 16px;
+  cursor: pointer;
+  position: relative;
+}
+
+.coordinate-options input[type="radio"]:checked {
+  background-color: #e84949;
+  border-color: #e84949;
+}
+
+.coordinate-options input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.dimension-select select {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  /* Added spacing after label */
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  /* Changed from center to flex-start */
+  gap: 20px;
+  /* Increased gap between label and input */
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 2;
+  min-width: 200px;
+}
+
+.form-group label {
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  color: #333;
+  padding-top: 8px;
+  /* Added to align with input when on same line */
+}
+
+.form-group input {
+  flex: 1;
+  min-width: 150px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.unit {
+  flex: 0 0 auto;
+  color: #666;
+  white-space: nowrap;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+  background-color: #e84949;
+  color: white;
+}
+
+button:hover {
+  background-color: #d73838;
+  transform: translateY(-2px);
+}
+
+.disabled-input {
+  background-color: #f5f5f5;
+  color: #7a7a7a;
+  cursor: not-allowed;
+  border: 1px solid #ddd;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  width: 400px;
+  text-align: center;
+}
+
+.ok-button {
+  background-color: #007bff;
+  margin-top: 20px;
+}
+
+.ok-button:hover {
+  background-color: #0056b3;
+}
+
+@media screen and (max-width: 1024px) {
+  .calculation-mode {
+    padding: 20px;
+    margin-top: 80px;
+    /* Increased for mobile navbar */
+  }
+
+  .coordinate-system,
+  .input-parameters {
+    padding: 15px;
+  }
+
+  .coordinate-options {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .coordinate-options label {
+    width: auto;
+    margin-right: 0;
+    padding: 8px 0;
+  }
+
+  .coordinate-options input[type="radio"] {
+    width: 20px;
+    /* Slightly larger for touch targets */
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  .form-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .form-group label {
+    min-width: unset;
+    max-width: unset;
+    padding-top: 0;
+  }
+
+  .input-wrapper {
+    width: 100%;
+  }
+
+  .input-wrapper input {
+    flex: 1;
+    min-width: 0;
+    /* Allows input to shrink */
+  }
+
+  .unit {
+    min-width: 40px;
+    text-align: left;
+    padding-left: 8px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button-group button {
+    width: 100%;
+    max-width: 300px;
+    margin: 5px auto;
+  }
+}
+
+/* iPad/Tablet specific adjustments */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .coordinate-options {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .coordinate-options label {
+    flex: 0 0 auto;
+    min-width: 200px;
+  }
+
+  .button-group {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .button-group button {
+    width: auto;
+  }
+}
+
+/* iPhone and similar devices */
+@media screen and (max-width: 428px) {
+  .calculation-mode {
+    padding: 15px;
+  }
+
+  .coordinate-options label {
+    font-size: 14px;
+    padding: 6px 0;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .coordinate-options input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    margin: 0;
+    margin-right: 8px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .input-wrapper input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .unit {
+    font-size: 14px;
+    min-width: 35px;
+  }
+}
+
+/* Ensure popups stay above everything */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  width: 400px;
+  text-align: center;
+  margin: 20px;
+}

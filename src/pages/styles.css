@@ -1,0 +1,20 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFC0C0;
+}
+
+#contour-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+canvas {
+    border: 1px solid black;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+}

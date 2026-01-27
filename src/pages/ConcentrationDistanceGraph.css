@@ -1,0 +1,200 @@
+/* ConcentrationDistanceGraph.css */
+.graph-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 60px);
+  margin-top: 60px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: auto;
+}
+
+.graph-wrapper {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px 0;
+  width: 100%;
+  height: 60vh; /* Use viewport height for better responsiveness */
+  min-height: 400px; /* Minimum height to ensure visibility */
+  max-height: 600px; /* Maximum height to maintain consistency */
+  position: relative;
+  overflow: hidden;
+}
+
+.error-text {
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #dc3545;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.loading-text {
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #007bff;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  margin: 5px;
+}
+
+.update-graph {
+  background-color: #28a745;
+  color: white;
+}
+
+.update-graph:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.update-graph:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.graph-options {
+  background-color: #007bff;
+  color: white;
+}
+
+.graph-options:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.print {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.print:hover {
+  background-color: #138496;
+  transform: translateY(-2px);
+}
+
+.close {
+  background-color: #dc3545;
+  color: white;
+}
+
+.close:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .graph-container {
+    margin-top: 80px; /* Increased margin for mobile navbar */
+    padding: 15px;
+  }
+
+  .graph-wrapper {
+    height: 50vh; /* Slightly smaller for mobile */
+    min-height: 300px;
+    padding: 15px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  button {
+    width: 100%;
+    max-width: 300px;
+    margin: 5px 0;
+  }
+}
+
+/* Tablet-specific adjustments */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .graph-wrapper {
+    height: 55vh;
+    min-height: 350px;
+  }
+
+  .button-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  button {
+    width: auto;
+    margin: 5px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .graph-container {
+    margin: 0;
+    padding: 0;
+  }
+
+  .print-graph {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    page-break-after: always;
+  }
+
+  .print-graph * {
+    visibility: visible;
+  }
+
+  .button-group,
+  .navbar,
+  .error-text,
+  .loading-text {
+    display: none !important;
+  }
+
+  .graph-wrapper {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    height: 100%;
+    max-height: none;
+  }
+}
+
+/* Reduce animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  button {
+    transition: none;
+  }
+
+  button:hover {
+    transform: none;
+  }
+}
