@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import './NavBar.css';
 
-function NavBar({ onLogout }) {
+function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const location = useLocation();
 
   useEffect(() => {
     // Add/remove class to body when menu opens/closes
@@ -45,8 +44,6 @@ function NavBar({ onLogout }) {
   const getNavLinkClass = (index) => {
     return index >= 1 && index <= 7 ? 'nav-link inactive' : 'nav-link';
   };
-
-  const isFileButtonInactive = location.pathname === '/logged-off';
 
   return (
     <nav className="navbar">

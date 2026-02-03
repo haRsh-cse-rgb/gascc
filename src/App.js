@@ -39,10 +39,6 @@ function App() {
     setUser(userData);
   };
 
-  const handleLogout = () => {
-    setUser(null);
-  };
-
   // Register service worker for PWA
   useEffect(() => {
     if ('serviceWorker' in navigator) {
@@ -95,9 +91,9 @@ function App() {
         </Routes>
       ) : (
         <>
-          {!isAppInstalled && <NavBar onLogout={handleLogout} />}
+          {!isAppInstalled && <NavBar />}
           <Routes>
-            <Route path="/" element={<HomePage onLogout={handleLogout} />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/logged-off" element={<LoggedOff />} />
             <Route path="/material-selection" element={<MaterialSelection />} />
             <Route path="/operating-parameters" element={<OperatingParameters />} />

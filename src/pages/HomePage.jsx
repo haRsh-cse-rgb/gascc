@@ -2,17 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
 
-function HomePage({ onLogout }) {
+function HomePage() {
   const navigate = useNavigate();
 
   const handleProceed = () => {
     navigate('/material-selection');
-  };
-
-  const handleLogout = () => {
-    if (onLogout) {
-        onLogout();
-    }
   };
 
   const handleContact = () => {
