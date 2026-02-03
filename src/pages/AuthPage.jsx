@@ -18,7 +18,7 @@ function AuthPage({ onLogin }) {
     setLoading(true);
     setError('');
 
-    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const API_URL = 'https://gascc.onrender.com' || 'http://localhost:5000';
 
     try {
       const response = await fetch(`${API_URL}/api/login`, {
@@ -52,7 +52,7 @@ function AuthPage({ onLogin }) {
     setLoading(true);
     setError('');
 
-    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const API_URL = 'https://gascc.onrender.com' || 'http://localhost:5000';
 
     try {
       const response = await fetch(`${API_URL}/api/register`, {

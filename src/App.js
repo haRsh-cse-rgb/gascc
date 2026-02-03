@@ -96,6 +96,9 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      {/* Layout-level Install button (only shows when not installed) */}
+      {!isAppInstalled && <InstallButton />}
+      
       {!user ? (
         <Routes>
           <Route path="*" element={<AuthPage onLogin={handleLogin} />} />
@@ -103,8 +106,6 @@ function App() {
       ) : (
         <>
           {!isAppInstalled && <NavBar onLogout={handleLogout} />}
-          {/* Layout-level Install button (only shows when not installed) */}
-          {!isAppInstalled && <InstallButton />}
           <Routes>
             <Route path="/" element={<HomePage onLogout={handleLogout} />} />
             <Route path="/logged-off" element={<LoggedOff />} />

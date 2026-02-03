@@ -1,68 +1,100 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* CONTAINER */
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 1rem;
   background-color: #f0f2f5;
 }
 
+/* CARD */
 .auth-box {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* HEADINGS */
+.auth-box h1,
+.auth-box h2 {
   text-align: center;
-}
-
-.auth-box h1, .auth-box h2 {
   margin-bottom: 1.5rem;
-  color: #333;
+  color: #222;
 }
 
-.button-group {
+/* FORM GROUP */
+.form-group {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-}
-
-.form-group {
+  align-items: flex-start; /* FIX */
+  gap: 0.4rem;
   margin-bottom: 1rem;
-  text-align: left;
 }
 
+/* LABEL */
 .form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: #666;
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #555;
 }
 
+/* INPUT */
 .form-group input {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 1rem;
 }
 
+/* INPUT FOCUS */
+.form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* BUTTON GROUP */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* BUTTON */
 .auth-btn {
   width: 100%;
   padding: 0.75rem;
   background-color: #007bff;
-  color: white;
+  color: #ffffff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.2s;
-  margin-top: 1rem;
+  transition: background-color 0.2s ease;
 }
 
-.auth-btn:hover {
+/* .auth-btn:hover {
   background-color: #0056b3;
-}
+} */
 
+/* SECONDARY BUTTON */
 .auth-btn.secondary {
   background-color: #6c757d;
 }
@@ -71,25 +103,38 @@
   background-color: #5a6268;
 }
 
+/* DISABLED */
 .auth-btn:disabled {
-  background-color: #ccc;
+  background-color: #cccccc;
   cursor: not-allowed;
 }
 
+/* LINK BUTTON */
 .link-btn {
+  margin-top: 1rem;
   background: none;
   border: none;
   color: #007bff;
   cursor: pointer;
-  margin-top: 1rem;
   font-size: 0.9rem;
   text-decoration: underline;
-  display: block;
-  width: 100%;
+  text-align: center;
+}
+.link-btn:hover {
+  color: #e5e8eb;
 }
 
+/* ERROR MESSAGE */
 .error-msg {
   color: #dc3545;
   margin-bottom: 1rem;
   font-size: 0.9rem;
+  text-align: center;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .auth-box {
+    padding: 1.5rem;
+  }
 }
