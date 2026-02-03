@@ -55,32 +55,7 @@ function NavBar({ onLogout }) {
       </button>
 
       <ul className={`nav-list ${isMenuOpen ? 'show' : ''}`}>
-        {/* File Dropdown */}
-        <li
-          className={`nav-item dropdown ${isFileButtonInactive ? 'inactive' : ''} ${activeDropdown === 'file' ? 'active' : ''}`}
-          onMouseEnter={() => !isFileButtonInactive && handleMouseEnter('file')}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => !isFileButtonInactive && toggleDropdown('file')}
-        >
-          <span className={`nav-link ${isFileButtonInactive ? 'inactive' : ''}`}>File</span>
-          {!isFileButtonInactive && activeDropdown === 'file' && (
-            <ul className="dropdown-menu">
-              <li>
-                <button 
-                  className="dropdown-item" 
-                  onClick={() => { 
-                    toggleMenu(); 
-                    if (onLogout) onLogout(); 
-                  }}
-                  style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer', fontSize: 'inherit', fontFamily: 'inherit' }}
-                >
-                  Exit
-                </button>
-              </li>
-            </ul>
-          )}
-        </li>
-
+        
         <li><Link to="/material-selection" className={getNavLinkClass(1)}>Material Selection</Link></li>
         <li><Link to="/coordinate-system" className={getNavLinkClass(2)}>Coordinate System</Link></li>
         <li><Link to="/visualizations" className={getNavLinkClass(3)}>Visualizations</Link></li>

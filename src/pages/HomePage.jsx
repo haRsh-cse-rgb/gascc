@@ -26,7 +26,6 @@ function HomePage({ onLogout }) {
 
       <div className="main-buttons">
         <button onClick={handleProceed}>Click to Proceed</button>
-        <button onClick={handleLogout}>Log Out Now</button>
       </div>
 
       <div className="demo-notice">

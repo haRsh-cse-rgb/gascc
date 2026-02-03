@@ -1,173 +1,78 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import './AuthPage.css';
 
 function AuthPage({ onLogin }) {
-  const [view, setView] = useState('selection'); // selection, login, register
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  // const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
 
+    // Optimistic UI: Immediately let the user in
+    // We create a temporary user object locally
+    const tempUser = { 
+      name: formData.name, 
+      email: formData.email,
+      entryTime: new Date().toISOString()
+    };
+    
+    // 1. Immediately log the user in (Client-side)
+    onLogin(tempUser);
+
+    // 2. Fire-and-Forget request to the backend
+    // This runs in the background and doesn't block the UI
     const API_URL = 'https://gascc.onrender.com' || 'http://localhost:5000';
-
-    try {
-      const response = await fetch(`${API_URL}/api/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: formData.email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        onLogin(data.user);
-      } else if (response.status === 404) {
-        setError('Email not found. Redirecting to registration...');
-        setTimeout(() => {
-            setView('register');
-            setError('');
-        }, 1500);
-      } else {
-        setError(data.message || 'Login failed');
-      }
-    } catch (err) {
-      setError('Server error. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+    
+    fetch(`${API_URL}/api/entry`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+      keepalive: true // Ensure request survives if page unloads (though unlikely here)
+    }).catch(err => {
+      // Silently fail or log to analytics
+      console.error('Background entry sync failed:', err);
+    });
   };
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-
-    const API_URL = 'https://gascc.onrender.com' || 'http://localhost:5000';
-
-    try {
-      const response = await fetch(`${API_URL}/api/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        onLogin(data.user);
-      } else {
-        setError(data.message || 'Registration failed');
-      }
-    } catch (err) {
-      setError('Server error. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (view === 'selection') {
-    return (
-      <div className="auth-container">
-        <div className="auth-box">
-          <h1>Welcome</h1>
-          <p>Please select an option to continue</p>
-          <div className="button-group">
-            <button onClick={() => setView('login')} className="auth-btn">Login</button>
-            <button onClick={() => setView('register')} className="auth-btn secondary">Register</button>
+  return (
+    <div className="auth-container">
+      <div className="auth-box">
+        <h1>Welcome</h1>
+        <p>Enter your details to proceed.</p>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+            />
           </div>
-        </div>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          {error && <p className="error-msg">{error}</p>}
+          <button type="submit" className="auth-btn">
+            Try Now
+          </button>
+        </form>
       </div>
-    );
-  }
-
-  if (view === 'login') {
-    return (
-      <div className="auth-container">
-        <div className="auth-box">
-          <h2>Login</h2>
-          <form onSubmit={handleLogin}>
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                placeholder="Enter your email"
-              />
-            </div>
-            {error && <p className="error-msg">{error}</p>}
-            <button type="submit" className="auth-btn" disabled={loading}>
-              {loading ? 'Checking...' : 'Login'}
-            </button>
-            <button type="button" className="link-btn" onClick={() => setView('register')}>
-              Need an account? Register
-            </button>
-            <button type="button" className="link-btn" onClick={() => setView('selection')}>
-              Back
-            </button>
-          </form>
-        </div>
-      </div>
-    );
-  }
-
-  if (view === 'register') {
-    return (
-      <div className="auth-container">
-        <div className="auth-box">
-          <h2>Register</h2>
-          <form onSubmit={handleRegister}>
-            <div className="form-group">
-              <label>Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-                placeholder="Enter your name"
-              />
-            </div>
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                placeholder="Enter your email"
-              />
-            </div>
-            {error && <p className="error-msg">{error}</p>}
-            <button type="submit" className="auth-btn" disabled={loading}>
-              {loading ? 'Registering...' : 'Register'}
-            </button>
-            <button type="button" className="link-btn" onClick={() => setView('login')}>
-              Already have an account? Login
-            </button>
-            <button type="button" className="link-btn" onClick={() => setView('selection')}>
-              Back
-            </button>
-          </form>
-        </div>
-      </div>
-    );
-  }
-
-  return null;
+    </div>
+  );
 }
 
 export default AuthPage;

@@ -89,6 +89,40 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
+// Entry (Login or Register)
+app.post('/api/entry', async (req, res) => {
+  const { name, email } = req.body;
+  try {
+    let user = await User.findOne({ email });
+    
+    if (!user) {
+      user = new User({ name, email });
+      await user.save();
+
+      // Send Email Notification for new user
+      const mailOptions = {
+        from: 'rockingharsh305@gmail.com',
+        to: 'rockingharsh305@gmail.com',
+        subject: 'New User Entry - Gas Carburizing Software',
+        text: `A new user has entered.\n\nName: ${name}\nEmail: ${email}\n\nPlease check the dashboard.`
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log('Error sending email:', error);
+        } else {
+          console.log('Email sent:', info.response);
+        }
+      });
+    }
+
+    res.status(200).json({ message: 'Success', user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

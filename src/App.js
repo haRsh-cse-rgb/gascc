@@ -35,22 +35,12 @@ function App() {
   const [isAppInstalled, setIsAppInstalled] = useState(false);
   const [user, setUser] = useState(null);
 
-  // Load user from localStorage on mount
-  useEffect(() => {
-    const storedUser = localStorage.getItem('gascUser');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
-
   const handleLogin = (userData) => {
     setUser(userData);
-    localStorage.setItem('gascUser', JSON.stringify(userData));
   };
 
   const handleLogout = () => {
     setUser(null);
-    localStorage.removeItem('gascUser');
   };
 
   // Register service worker for PWA
