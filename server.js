@@ -27,69 +27,22 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-// Email Transporter (Configure with your credentials)
+// Email Transporter (use environment variables for credentials)
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'rockingharsh305@gmail.com', // Using the receiver as sender for now
-    pass: 'YOUR_APP_PASSWORD' // User needs to provide this
+    // user: process.env.GMAIL_USER || 'rockingharsh305@gmail.com',
+    // pass: process.env.GMAIL_APP_PASSWORD || 'YOUR_APP_PASSWORD'
+    user: 'rockingharsh305@gmail.com',
+    pass: 'nxfx upza tqum copf'
   }
 });
 
 // Routes
 
-// Check if email exists (Login)
-app.post('/api/login', async (req, res) => {
-  const { email } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (user) {
-      return res.status(200).json({ exists: true, user });
-    } else {
-      return res.status(404).json({ exists: false, message: 'User not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'Server error' });
-  }
-});
+ 
 
-// Register User
-app.post('/api/register', async (req, res) => {
-  const { name, email } = req.body;
-  try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
-
-    const newUser = new User({ name, email });
-    await newUser.save();
-
-    // Send Email Notification
-    const mailOptions = {
-      from: 'rockingharsh305@gmail.com',
-      to: 'rockingharsh305@gmail.com',
-      subject: 'New User Registration - Gas Carburizing Software',
-      text: `A new user has registered.\n\nName: ${name}\nEmail: ${email}\n\nPlease check the dashboard.`
-    };
-
-    // Note: Email sending is asynchronous, we don't block response
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log('Error sending email:', error);
-      } else {
-        console.log('Email sent:', info.response);
-      }
-    });
-
-    res.status(201).json({ message: 'User registered successfully', user: newUser });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-// Entry (Login or Register)
+// Entry (Login or Register) - also send notification email
 app.post('/api/entry', async (req, res) => {
   const { name, email } = req.body;
   try {
@@ -98,23 +51,23 @@ app.post('/api/entry', async (req, res) => {
     if (!user) {
       user = new User({ name, email });
       await user.save();
-
-      // Send Email Notification for new user
-      const mailOptions = {
-        from: 'rockingharsh305@gmail.com',
-        to: 'rockingharsh305@gmail.com',
-        subject: 'New User Entry - Gas Carburizing Software',
-        text: `A new user has entered.\n\nName: ${name}\nEmail: ${email}\n\nPlease check the dashboard.`
-      };
-
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.log('Error sending email:', error);
-        } else {
-          console.log('Email sent:', info.response);
-        }
-      });
     }
+
+    // Send Email Notification for any entry (new or existing)
+    const mailOptions = {
+      from: 'rockingharsh305@gmail.com',
+      to: 'govindg@iisc.ac.in',
+      subject: 'User Entry - Gas Carburizing Software',
+      text: `A user has used the software.\n\nName: ${name}\nEmail: ${email}\n\nTimestamp: ${new Date().toISOString()}`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log('Error sending email:', error);
+      } else {
+        console.log('Email sent:', info.response);
+      }
+    });
 
     res.status(200).json({ message: 'Success', user });
   } catch (error) {
