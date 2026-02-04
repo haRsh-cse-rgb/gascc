@@ -31,10 +31,9 @@ const User = mongoose.model('User', userSchema);
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    // user: process.env.GMAIL_USER || 'rockingharsh305@gmail.com',
-    // pass: process.env.GMAIL_APP_PASSWORD || 'YOUR_APP_PASSWORD'
-    user: 'rockingharsh305@gmail.com',
-    pass: 'nxfx upza tqum copf'
+    user: process.env.GMAIL_USER || 'rockingharsh305@gmail.com',
+    pass: process.env.GMAIL_APP_PASSWORD || 'YOUR_APP_PASSWORD'
+    
   }
 });
 
